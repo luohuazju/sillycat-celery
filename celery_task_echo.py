@@ -5,10 +5,12 @@ import settings
 
 echo_celery = Celery("echo_celery", backend=settings.CELERY_BACKEND, broker=settings.CELERY_BROKER)
 
+# echo_celery.conf.beat_scheduler = 'celery.beat:PersistentScheduler'
+echo_celery.conf.beat_scheduler = 'celery.beat:MemoryScheduler'
 
 echo_celery.conf.beat_schedule = {
     'scheduled_echo': {
-        'task': 'echo_celery.scheduled_echo',
+        'task': 'scheduled_echo',
         'schedule': 5.0, # runs in every 5 seconds
         # 'args': (arg1, arg2, ...), Run the function with arguments
     }
