@@ -6,15 +6,20 @@ import settings
 echo_celery = Celery("echo_celery", backend=settings.CELERY_BACKEND, broker=settings.CELERY_BROKER)
 
 # echo_celery.conf.beat_scheduler = 'celery.beat:PersistentScheduler'
-echo_celery.conf.beat_scheduler = 'celery.beat:MemoryScheduler'
-
-echo_celery.conf.beat_schedule = {
-    'scheduled_echo': {
-        'task': 'scheduled_echo',
-        'schedule': 5.0, # runs in every 5 seconds
-        # 'args': (arg1, arg2, ...), Run the function with arguments
-    }
-}
+echo_celery.conf.update(
+    broker_url=settings.CELERY_BROKER,  # Redis broker URL
+    result_backend=settings.CELERY_BACKEND,  # Redis result backend
+    beat_scheduler='redbeat.schedulers:RedBeatScheduler',  # Set RedBeatScheduler
+    beat_schedule={
+        'scheduled_echo': {
+            'task': 'scheduled_echo',
+            'schedule': 5.0,  # runs in every 5 seconds
+            # 'args': (arg1, arg2, ...), Run the function with arguments
+        },
+    },
+    redbeat_redis_url=settings.CELERY_BEAT,  # Optional: separate Redis DB for RedBeat
+    redbeat_lock_timeout=10.0  # Optional: lock timeout to avoid race conditions
+)
 
 
 @echo_celery.task(

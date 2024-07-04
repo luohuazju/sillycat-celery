@@ -2,9 +2,9 @@
 python  celery redis as broker, flower to monitor
 
 ```
-celery -A ai_celery worker --loglevel=INFO
+celery -A celery_task_ai worker --loglevel=DEBUG
 
-celery -A echo_celery worker --loglevel=INFO
+celery -A celery_task_echo worker --loglevel=DEBUG
 ```
 
 We can directly deploy the tasks
@@ -18,13 +18,23 @@ ai.delay()
 echo.delay()
 ```
 
+Run the task
+```
+python trigger_task.py
+```
+
 Command to start Beat
 
 ```
-celery -A echo_celery beat --loglevel=INFO
+celery -A celery_task_echo beat --loglevel=DEBUG
 ```
 
 Command to start a Redis
 ```
 docker run -p 6379:6379 redis:alpine
+```
+
+Command to restart the monitor
+```
+celery --broker=redis://127.0.0.1:6379/2 flower  
 ```
