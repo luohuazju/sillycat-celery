@@ -7,6 +7,11 @@ celery -A celery_task_ai worker --loglevel=DEBUG
 celery -A celery_task_echo worker --loglevel=DEBUG
 ```
 
+Or start the ai worker
+```
+pm2 start pm2-celery-worker.config.js 
+```
+
 We can directly deploy the tasks
 
 ```
