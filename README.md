@@ -43,3 +43,6 @@ Command to restart the monitor
 ```
 celery --broker=redis://127.0.0.1:6379/2 flower  
 ```
+
+Visit page
+http://localhost:5555/
