@@ -1,4 +1,8 @@
-CELERY_BACKEND = "redis://127.0.0.1:6379/1"
-CELERY_BROKER = "redis://127.0.0.1:6379/2"
-CELERY_BEAT = "redis://127.0.0.1:6379/3"
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+
+CELERY_BACKEND = os.getenv('CELERY_BACKEND')
+CELERY_BROKER = os.getenv('CELERY_BROKER')
+CELERY_BEAT = os.getenv('CELERY_BEAT')

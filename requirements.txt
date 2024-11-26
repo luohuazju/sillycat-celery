@@ -2,3 +2,4 @@ celery==5.4.0
 celery[redis]==5.4.0
 django-celery-beat==2.6.0
 celery-redbeat==2.2.0
+python-dotenv==1.0.1
