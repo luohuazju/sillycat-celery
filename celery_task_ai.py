@@ -33,3 +33,9 @@ print(f"Broker Transport Options: {ai_celery.conf.broker_transport_options}")
 def ai():
     time.sleep(10)
     print("AI task is running and finished!")
+
+
+# Trigger the task conditionally
+if __name__ == "__main__":
+    result = ai.delay()  # Trigger the task
+    print(f"Task has been sent. Task ID: {result.id}")
