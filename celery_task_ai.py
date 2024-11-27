@@ -6,7 +6,7 @@ import settings
 ai_celery = Celery("ai_celery", backend=settings.CELERY_BACKEND, broker=settings.CELERY_BROKER)
 
 print("Broker URL:", settings.CELERY_BROKER)
-print("Backend URL:", settings.CELERY_BACKEN)
+print("Backend URL:", settings.CELERY_BACKEND)
 print("transport options:", settings.CELERY_BROKER_TRANSPORT_OPTIONS)
 
 ai_celery.conf.update(
