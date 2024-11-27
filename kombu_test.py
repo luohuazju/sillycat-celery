@@ -15,11 +15,10 @@ try:
     if not master_name:
         raise ValueError("Master name is not defined in transport options.")
 
-    # Manually create a Sentinel instance
-    sentinel_hosts = conn.transport.get_sentinel_instance().sentinels
-    sentinel = Sentinel(sentinel_hosts, socket_timeout=0.5, password="laproadminpwd")
+    # Create a Sentinel instance
+    sentinel = Sentinel("sentinel://:laproadminpwd@lapro-base-3:26379/2", socket_timeout=0.5, password='laproadminpwd')
 
-    # Retrieve master node information
+    # Discover the master for the specified master name
     master_host, master_port = sentinel.discover_master(master_name)
     print(f"Connected to Redis master: {master_host}:{master_port}")
 except Exception as e:
