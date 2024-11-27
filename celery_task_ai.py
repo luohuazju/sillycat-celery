@@ -37,5 +37,7 @@ def ai():
 
 # Trigger the task conditionally
 if __name__ == "__main__":
-    result = ai.delay()  # Trigger the task
-    print(f"Task has been sent. Task ID: {result.id}")
+    print("Broker Transport Options trigger:", ai_celery.conf.broker_transport_options)
+    ai.apply_async(kwargs={}, transport_options={'master_name': 'laprocluster'})
+    #result = ai.delay()  # Trigger the task
+    #print(f"Task has been sent. Task ID: {result.id}")
