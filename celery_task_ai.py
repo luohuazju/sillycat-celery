@@ -10,6 +10,7 @@ ai_celery.conf.update(
     result_backend=settings.CELERY_BACKEND,  # Redis result backend
     broker_transport_options={
         'master_name': 'laprocluster',  # Redis master name
+        'service_name': 'laprocluster', 
     }
 )
 
