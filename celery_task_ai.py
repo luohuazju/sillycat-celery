@@ -14,10 +14,6 @@ ai_celery.conf.update(
     result_backend=settings.CELERY_BACKEND,  # Redis result backend
     broker_transport_options={
         'master_name': 'laprocluster',  # Redis master name
-        'sentinel_kwargs': {
-            'service': 'laprocluster',  # Optional: specify the service name
-            'db': 2,  # Database number, adjust as needed
-        }
     }
 )
 
