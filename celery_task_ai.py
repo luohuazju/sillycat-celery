@@ -3,14 +3,18 @@ import time
 import settings
 
 
-ai_celery = Celery("ai_celery", backend=settings.CELERY_BACKEND, broker=settings.CELERY_BROKER)
+ai_celery = Celery(
+    "ai_celery",
+    backend=settings.CELERY_BACKEND,
+    broker=settings.CELERY_BROKER,
+    broker_transport_options={'master_name': 'laprocluster'}
+)
 
 ai_celery.conf.update(
     broker_url=settings.CELERY_BROKER,  # Redis broker URL
     result_backend=settings.CELERY_BACKEND,  # Redis result backend
     broker_transport_options={
         'master_name': 'laprocluster',  # Redis master name
-        'service_name': 'laprocluster', 
     }
 )
 
