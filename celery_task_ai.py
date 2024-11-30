@@ -8,7 +8,7 @@ ai_celery = Celery(
     backend=settings.CELERY_BACKEND,
     broker=settings.CELERY_BROKER,
     broker_transport_options={'master_name': 'laprocluster'},
-    result_backend_transport_options={'master_name': 'laprocluster'}
+    # result_backend_transport_options={'master_name': 'laprocluster'}
 )
 
 @ai_celery.task(
@@ -25,6 +25,6 @@ def ai():
 # Trigger the task conditionally
 if __name__ == "__main__":
     print("Broker Transport Options trigger:", ai_celery.conf.broker_transport_options)
-    print(f"Backend Transport Options: {ai_celery.conf.result_backend_transport_options}")
+    # print(f"Backend Transport Options: {ai_celery.conf.result_backend_transport_options}")
     result = ai.delay()  # Trigger the task
     print(f"Task has been sent. Task ID: {result.id}")
