@@ -4,12 +4,7 @@ from celery_task_ai import ai
 
 result = ai.delay()  # Trigger the task
 print(f"Task has been sent. Task ID: {result.id}")
-# ai.delay()
-#ai.apply_async(kwargs={},
-#               transport_options={'master_name': 'laprocluster'},
-#               result_backend_transport_options={'master_name': 'laprocluster'})
 #ai_celery.send_task(
 #    'ai_task',
 #    broker_transport_options={'master_name': 'laprocluster'}
 #)
-# ai.apply_async(kwargs={}, transport_options={'master_name': 'laprocluster'})
